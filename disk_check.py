@@ -15,6 +15,6 @@ def disk_check(df_list):
         percentage = int(usage.split("%")[0])
     
         if percentage >= 80:
-            print "%s is at %s%%" % (filesystem, percentage)
+            print "The %s filesystem is at %s%%" % (filesystem, percentage)
     
 disk_check(df_output)
