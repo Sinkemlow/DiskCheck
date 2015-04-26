@@ -15,7 +15,7 @@ def get_df():
         return df_output
 
     elif os == 'darwin':
-        print "This is an OSX based system"
+        print "This is an OSX based system."
         df = check_output(['df', '-PhT', 'hfs'])
         df_output = df.split('\n')
         df_output.pop(0)
@@ -23,7 +23,7 @@ def get_df():
         return df_output
 
     else:
-        print "Unable to determine Operating System"
+        print "Unable to determine Operating System."
         exit(0)
 
 
