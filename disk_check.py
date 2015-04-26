@@ -29,18 +29,21 @@ def get_df():
 
 
 def disk_check(df_list):
+
     hostname = gethostname()
-    print "----------------------"
-    print "Filesystems above 80%:"
-    print "----------------------"
+    limit = 80
+
     for line in df_list:
         usage = line.split()[4]
         filesystem = line.split()[5]
         percentage = int(usage.split("%")[0])
     
-        if percentage >= 80:
+        if percentage >= limit:
             message = "The %s filesystem on %s is at %s%%" % (filesystem, hostname, percentage)
             print message
+
+        else:
+            print "All filesystems are below %s" % limit
 
 
 def main():
