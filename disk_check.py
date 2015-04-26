@@ -1,5 +1,6 @@
 from subprocess import check_output
 from sys import platform, exit
+from socket import gethostname
 
 
 def get_df():
@@ -28,6 +29,7 @@ def get_df():
 
 
 def disk_check(df_list):
+    hostname = gethostname()
     print "----------------------"
     print "Filesystems above 80%:"
     print "----------------------"
@@ -37,7 +39,7 @@ def disk_check(df_list):
         percentage = int(usage.split("%")[0])
     
         if percentage >= 80:
-            message = "The %s filesystem is at %s%%" % (filesystem, percentage)
+            message = "The %s filesystem on %s is at %s%%" % (filesystem, hostname, percentage)
             print message
 
 
