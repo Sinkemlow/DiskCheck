@@ -1,9 +1,31 @@
 from subprocess import check_output
+from sys import platform, exit
 
-df = check_output(['df', '-Ph'])
-df_output = df.split('\n')
-df_output.pop(0)
-df_output.pop()
+
+def get_df():
+
+    os = platform
+
+    if os == 'linux2':
+        print "This is a Linux based system."
+        df = check_output(['df', '-Ph'])
+        df_output = df.split('\n')
+        df_output.pop(0)
+        df_output.pop()
+        return df_output
+
+    elif os == 'darwin':
+        print "This is an OSX based system"
+        df = check_output(['df', '-PhT', 'hfs'])
+        df_output = df.split('\n')
+        df_output.pop(0)
+        df_output.pop()
+        return df_output
+
+    else:
+        print "Unable to determine Operating System"
+        exit(0)
+
 
 def disk_check(df_list):
     print "----------------------"
@@ -16,5 +38,9 @@ def disk_check(df_list):
     
         if percentage >= 80:
             print "The %s filesystem is at %s%%" % (filesystem, percentage)
-    
-disk_check(df_output)
+
+
+def main():
+    disk_check(get_df())
+
+main()
