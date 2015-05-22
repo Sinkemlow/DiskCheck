@@ -40,6 +40,7 @@ def disk_check(df_list):
     
         if percentage >= limit:
             message = "The %s filesystem on %s is at %s%%" % (filesystem, hostname, percentage)
+            print
             print message
 
         else:
